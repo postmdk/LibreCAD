@@ -167,6 +167,10 @@ distance between points=%2 is larger than diameter=%3</source>
 <context>
     <name>LC_ActionFactory</name>
     <message>
+        <source>Export as CA&amp;M/plain SVG...</source>
+        <translation>Экспорт в CA&amp;M/plain SVG...</translation>
+    </message>
+    <message>
         <source>&amp;Window Zoom</source>
         <translation>Уве&amp;личить рамкой</translation>
     </message>
@@ -788,6 +792,10 @@ distance between points=%2 is larger than diameter=%3</source>
         <translation>Сохранить &amp;как...</translation>
     </message>
     <message>
+        <source>Save A&amp;ll...</source>
+        <translation>Сохранить вс&amp;е...</translation>
+    </message>
+    <message>
         <source>&amp;Export as image</source>
         <translation>Экспорт в &amp;изображение</translation>
     </message>
@@ -795,6 +803,10 @@ distance between points=%2 is larger than diameter=%3</source>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
     </message>
+    <message>
+        <source>Close All</source>
+        <translation>Закрыть все</translation>
+    </message>    
     <message>
         <source>&amp;Print...</source>
         <translation>&amp;Печать...</translation>
@@ -1087,6 +1099,14 @@ distance between points=%2 is larger than diameter=%3</source>
 </context>
 <context>
     <name>QC_ApplicationWindow</name>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Сохранить</translation>
+        </message>
+    <message>
+        <source>Save &amp;as...</source>
+        <translation>Сохранить &amp;как...</translation>
+    </message>
     <message>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
@@ -1510,8 +1530,16 @@ Auto-save disabled.</source>
         <translation type="obsolete">Пожалуйста, рассмотрите возможность сделать пожертвование на поддержку исходного кода и сайта.</translation>
     </message>
     <message>
-        <source>Su&amp;b-Window mode</source>
+        <source>&amp;Window mode</source>
         <translation>Режим &amp;окон</translation>
+    </message>
+    <message>
+        <source>&amp;Arrange</source>
+        <translation>Р&amp;асположение</translation>
+    </message>
+    <message>
+        <source>&amp;Maximized</source>
+        <translation>М&amp;аксимизированный</translation>
     </message>
     <message>
         <source>Tile &amp;Vertically</source>
@@ -1727,7 +1755,7 @@ Please check its existence and permissions.</source>
     </message>
     <message>
         <source>Dock Wid&amp;gets</source>
-        <translation>&amp;Стыкуемый интерфейс</translation>
+        <translation>С&amp;тыкуемый интерфейс</translation>
     </message>
     <message>
         <source>Recent Files</source>
@@ -6987,8 +7015,28 @@ Please choose the unit you want to use for new drawings and your preferred langu
 <context>
     <name>QG_DlgOptionsMakerCam</name>
     <message>
-        <source>Export as MakerCAM SVG</source>
-        <translation>Экспорт в MakerCAM SVG</translation>
+        <source>Export as CAM/plain SVG</source>
+        <translation>Экспорт в CAM/plain SVG</translation>
+    </message>
+    <message>
+        <source>Default width of elements, mm</source>
+        <translation>Стандартная ширина элементов, мм</translation>
+    </message>
+    <message>
+        <source>Raster Image export</source>
+        <translation>Экспорт растрового изображения</translation>
+    </message>
+    <message>
+        <source>Dash/Dot Lines</source>
+        <translation>Штриховые/пунктирные линии</translation>
+    </message>
+    <message>
+        <source>Length of the pattern, mm</source>
+        <translation>Длина паттерна, мм</translation>
+    </message>
+    <message>
+        <source>Bake dash/dot lines to SVG path</source>
+        <translation>Включить штриховые/пунктирные линии в SVG</translation>
     </message>
     <message>
         <source>Layers</source>
@@ -8071,7 +8119,7 @@ Please choose the unit you want to use for new drawings and your preferred langu
     </message>
 </context>
 <context>
-    <name>QG_FileDialog</name>
+    <name>QFileDialog</name>
     <message>
         <source>Drawing Exchange DXF 2000 %1</source>
         <translation>Формат обмена графическими данными DXF 2000 %1</translation>
@@ -8102,11 +8150,11 @@ Please choose the unit you want to use for new drawings and your preferred langu
     </message>
     <message>
         <source>Open Drawing</source>
-        <translation type="obsolete">Открыть чертеж</translation>
+        <translation>Открыть чертеж</translation>
     </message>
     <message>
         <source>Save Drawing As</source>
-        <translation type="obsolete">Сохранить чертеж как</translation>
+        <translation>Сохранить чертеж как</translation>
     </message>
     <message>
         <source>Drawing Exchange DXF 2007 %1</source>
@@ -8541,6 +8589,14 @@ The contents of a Construction Layer should not appear in printout.</source>
     <message>
         <source>Library Browser</source>
         <translation type="obsolete">Обзор библиотеки</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Обновить</translation>
+    </message>
+    <message>
+        <source>Rebuild</source>
+        <translation>Перестроить</translation>
     </message>
     <message>
         <source>Directories</source>
@@ -11151,11 +11207,11 @@ Continue?</source>
     </message>
     <message>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Виджеты</translation>
     </message>
     <message>
         <source>Creators</source>
-        <translation type="unfinished"></translation>
+        <translation>Создатели</translation>
     </message>
     <message>
         <source>Wiki</source>
@@ -11187,7 +11243,7 @@ Continue?</source>
     </message>
     <message>
         <source>Pen Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Мастер пера</translation>
     </message>
     <message>
         <source>Release Information</source>
@@ -16782,6 +16838,21 @@ Continue?</source>
     <message>
         <source>Update</source>
         <translation>Обновить</translation>
+    </message>
+</context>
+<context>
+<name>LC_WidgetFactory</name>
+    <message>
+        <source>&amp;Widgets</source>
+        <translation>Вид&amp;жеты</translation>
+    </message>
+    <message>
+        <source>Dock Areas</source>
+        <translation>&amp;Стыкуемые области</translation>
+    </message>
+    <message>
+        <source>Library Browser</source>
+        <translation >Обзор библиотеки</translation>
     </message>
 </context>
 </TS>

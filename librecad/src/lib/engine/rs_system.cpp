@@ -103,19 +103,20 @@ void RS_System::init(const QString& appName,
 void RS_System::initLanguageList() {
     RS_DEBUG->print("RS_System::initLanguageList");
     QStringList lst = getFileList("qm", "qm");
-
+    QStringList trlst = getFileList("translations", "qm");
     RS_SETTINGS->beginGroup("/Paths");
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     lst += (RS_SETTINGS->readEntry("/Translations", "")).split(";", Qt::SkipEmptyParts);
+    trlst += (RS_SETTINGS->readEntry("/Locales", "")).split(";", Qt::SkipEmptyParts);
 #else
     lst += (RS_SETTINGS->readEntry("/Translations", "")).split(";", QString::SkipEmptyParts);
+    trlst += (RS_SETTINGS->readEntry("/Locales", "")).split(";", Qt::SkipEmptyParts);
 #endif
     RS_SETTINGS->endGroup();
 
     for (QStringList::Iterator it = lst.begin();
          it != lst.end();
          ++it) {
-
         RS_DEBUG->print("RS_System::initLanguageList: qm file: %s",
                         (*it).toLatin1().data());
 
@@ -400,6 +401,7 @@ void RS_System::loadTranslation(const QString& lang, const QString& /*langCmd*/)
     //make translation filenames case insensitive, #276
     QString langLower("");
     QString langUpper("");
+
     int i0 = lang.indexOf('_');
     if (i0 >= 2 && lang.size() - i0 >= 2) {
         //contains region code
@@ -412,12 +414,14 @@ void RS_System::loadTranslation(const QString& lang, const QString& /*langCmd*/)
     }
     // search in various directories for translations
     QStringList lst = getDirectoryList( "qm");
-
+    QStringList trlst = getDirectoryList( "translations");
     RS_SETTINGS->beginGroup( "/Paths");
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     lst += (RS_SETTINGS->readEntry( "/Translations", "")).split( ";", Qt::SkipEmptyParts);
+    trlst += (RS_SETTINGS->readEntry( "/Locales", "")).split( ";", Qt::SkipEmptyParts);
 #else
     lst += (RS_SETTINGS->readEntry( "/Translations", "")).split( ";", QString::SkipEmptyParts);
+    trlst += (RS_SETTINGS->readEntry( "/Locales", "")).split( ";", Qt::SkipEmptyParts);
 #endif
     RS_SETTINGS->endGroup();
 
@@ -437,37 +441,51 @@ void RS_System::loadTranslation(const QString& lang, const QString& /*langCmd*/)
             langFileUpper = "librecad_" + langUpper + ".qm",
             langPlugInsLower = "plugins_" + langLower + ".qm",
             langPlugInsUpper = "plugins_" + langUpper + ".qm",
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+            langQtLower = "qtbase_" + langLower + ".qm",
+            langQtUpper = "qtbase_" + langUpper + ".qm";
+#else
             langQtLower = "qt_" + langLower + ".qm",
             langQtUpper = "qt_" + langUpper + ".qm";
+#endif
     QTranslator* t = new QTranslator(0);
+
     for (QStringList::Iterator it = lst.begin();
          it != lst.end();
          ++it) {
-
         // load LibreCAD translations
         if (nullptr == tLibreCAD) {
-            if (t->load( langFileLower, *it) == true
-                    || (  ! langUpper.isEmpty()
-                          && t->load( langFileUpper, *it) == true)) {
+            if (t->load(langFileLower, *it) == true
+                || (!langUpper.isEmpty()
+                    && t->load(langFileUpper, *it) == true)) {
                 tLibreCAD = t;
-                qApp->installTranslator( tLibreCAD);
+                qApp->installTranslator(tLibreCAD);
                 t = new QTranslator(0);
             }
         }
 
         // load PlugIns translations
         if (nullptr == tPlugIns) {
-            if (t->load( langPlugInsLower, *it) == true
-                    || (  ! langUpper.isEmpty()
-                          && t->load( langPlugInsUpper, *it) == true)) {
+            if (t->load(langPlugInsLower, *it) == true
+                || (!langUpper.isEmpty()
+                    && t->load(langPlugInsUpper, *it) == true)) {
                 tPlugIns = t;
-                qApp->installTranslator( tPlugIns);
+                qApp->installTranslator(tPlugIns);
+
                 t = new QTranslator(0);
             }
         }
+        if (nullptr != tLibreCAD && nullptr != tPlugIns) {
+            break;
+        }
 
-        // load Qt standard dialog translations
+    }
+    // load Qt standard dialog translations
+    for(QStringList::Iterator it = trlst.begin();
+        it != trlst.end();
+        ++it){
         if (nullptr == tQt) {
+
             if (t->load( langQtLower, *it) == true
                     || (  ! langUpper.isEmpty()
                           && t->load( langQtUpper, *it) == true)) {
@@ -476,13 +494,15 @@ void RS_System::loadTranslation(const QString& lang, const QString& /*langCmd*/)
                 t = new QTranslator(0);
             }
         }
-        if (nullptr != tLibreCAD && nullptr != tPlugIns && nullptr != tQt) {
+        if (nullptr != tQt) {
             break;
         }
+
     }
     if (nullptr != t) {
         delete t;
     }
+
 }
 
 
@@ -617,7 +637,6 @@ QStringList RS_System::getDirectoryList(const QString& _subDirectory) {
     dirList.append( QDir::cleanPath( appDir + "/../share/" + appDirName + "/" + subDirectory));
     dirList.append( QDir::cleanPath( appDir + "/../lib64/" + appDirName + "/" + subDirectory));
     dirList.append( QDir::cleanPath( appDir + "/../lib/" + appDirName + "/" + subDirectory));
-
     if (QStringLiteral( "plugins") == subDirectory) {
         dirList.append( QDir::cleanPath( appDir + "/../lib64/" + appDirName));
         dirList.append( QDir::cleanPath( appDir + "/../lib/" + appDirName));
@@ -670,6 +689,12 @@ QStringList RS_System::getDirectoryList(const QString& _subDirectory) {
         dirList += (RS_SETTINGS->readEntry( "/Translations", "")).split( QRegExp("[;]"),
                                                                   option);
     }
+    else if (subDirectory.startsWith( "translations")) {
+        dirList.append(subDirectory); // for load Qt standard dialog translations
+        dirList += (RS_SETTINGS->readEntry( "/Locales", "")).split( QRegExp("[;]"),
+                                                                         option);
+    }
+
     RS_SETTINGS->endGroup();
 
     QStringList ret;
@@ -685,7 +710,6 @@ QStringList RS_System::getDirectoryList(const QString& _subDirectory) {
     }
 
     for (auto& dir: ret) {
-
 
         RS_DEBUG->print("%s\n", QString("%1(): line %2: dir=%3").arg(__func__).arg(__LINE__).arg(dir).toStdString().c_str());
     }

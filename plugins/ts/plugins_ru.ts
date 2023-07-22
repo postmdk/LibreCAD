@@ -25,6 +25,16 @@
 <context>
     <name>LC_Align</name>
     <message>
+        <location filename="../align/align.cpp" line="32"/>
+        <source>Align settings...</source>
+        <translation>Настройка выравнивания...</translation>
+    </message>
+    <message>
+    <location filename="../align/align.cpp" line="54"/>
+        <source>Align Settings</source>
+        <translation>Настройка выровнивания</translation>
+    </message>
+    <message>
         <location filename="../align/align.cpp" line="20"/>
         <location filename="../align/align.cpp" line="27"/>
         <source>Align</source>
@@ -50,6 +60,38 @@
         <source>second target point:</source>
         <translation>Вторая целевая точка:</translation>
     </message>
+    <message>
+        <location filename="../align/align.cpp" line="49"/>
+        <source>Keep original objects</source>
+        <translation>Сохранять оригинальные объекты</translation>
+    </message>
+    <message>
+        <location filename="../align/align.cpp" line="49"/>
+        <source>Specify base points first</source>
+        <translation>Сначала указать базовые точки</translation>
+    </message>
+    <message>
+        <location filename="../align/align.cpp" line="57"/>
+        <source>Click on options to set/unset,
+Ok to accept and start alignment.</source>
+        <translation>Включить/выключить нужные опции,
+OK принять и начать выравнивание</translation>
+    </message>
+    <message>
+        <location filename="../align/align.cpp" line="60"/>
+        <source>If 'Keep original objects' is checked,
+Align will copy rather than move the selected objects.
+
+If 'Specify base points first' is checked,
+Align will prompt for the alignment points in the order
+first base, second base, first target, second target.</source>
+        <translation>Если установлен флажок 'Сохранить исходные объекты',
+Выравнивание копирует, а не перемещает выбранные объекты.
+
+Если установлен флажок 'Сначала указать базовые точки',
+Выравнивание запросит точки выравнивания в порядке
+первая база, вторая база, первая цель, вторая цель.</translation>
+        </message>
 </context>
 <context>
     <name>LC_Gear</name>

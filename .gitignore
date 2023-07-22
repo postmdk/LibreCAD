@@ -1,15 +1,13 @@
-# LibreCAD root folder
-/*.dxf
-/*.sh
-/*.txt
-/\.*
-
 # Apple generated directories
 LibreCAD.app/
 LibreCAD.pbproj/
 LibreCAD.dmg
 Info.plist
-
+/\.idea/
+/\.vscode/
+/\.vs/
+/\cmake-build*/
+/\build/
 # globs, anywhere
 *.o
 *.lo
@@ -17,9 +15,6 @@ Info.plist
 
 *.autosave
 *~
-*.patch
-*.rej
-\#*.dxf
 
 # filenames, anywhere
 Makefile.in
@@ -37,9 +32,6 @@ unix/
 *.AppImage
 
 # Win/MSVC generated files and binaries
-windows/
-release/
-debug/
 *.ncb
 *.suo
 *.idb
@@ -52,6 +44,8 @@ debug/
 *.rc
 *.bak
 *.obj
+/\out/
+/\windows/
 object_script.LibreCAD.*
 object_script.libdxfrw.*
 # Win/qmake generated project files
@@ -95,6 +89,7 @@ vgcore.*
 core.*
 
 .qmake.stash
+CMakeSettings.json
 
 #Qt build files
 *.tlog
